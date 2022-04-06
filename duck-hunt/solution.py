@@ -12,11 +12,9 @@ April 5, 2022
 # so we transpose it to resize to (768, 1024, 3)
 
 last_img = np.zeros((768, 1024))
-toggle = 0
 
 def GetLocation(move_type, env, current_frame):
     global last_img
-    global toggle
     move_type = "absolute"
     
     #print(current_frame.shape)
@@ -38,15 +36,12 @@ def GetLocation(move_type, env, current_frame):
         c = 20
         if len(h[0]) > 0 and len(h[1]) > 0:
             coordinates.append({'coordinate' : (h[1][0], h[0][0]), 'move_type' : move_type})
-            if toggle == 5:
-                coordinates.append({'coordinate' : (h[1][0] + c, h[0][0] + c), 'move_type' : move_type})
-                coordinates.append({'coordinate' : (h[1][0] + c, h[0][0] - c), 'move_type' : move_type})
-                coordinates.append({'coordinate' : (h[1][0] - c, h[0][0] + c), 'move_type' : move_type})
-                coordinates.append({'coordinate' : (h[1][0] - c, h[0][0] - c), 'move_type' : move_type})
-                toggle = 0 
-            else:
-                toggle = toggle + 1
-            #coordinates.append({'coordinate' : (width, height), 'move_type' : "absolute"})
+
+            coordinates.append({'coordinate' : (h[1][0] + c, h[0][0] + c), 'move_type' : move_type})
+            coordinates.append({'coordinate' : (h[1][0] + c, h[0][0] - c), 'move_type' : move_type})
+            coordinates.append({'coordinate' : (h[1][0] - c, h[0][0] + c), 'move_type' : move_type})
+            coordinates.append({'coordinate' : (h[1][0] - c, h[0][0] - c), 'move_type' : move_type})
+
            
     last_img = current_img
     return coordinates
