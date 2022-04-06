@@ -49,7 +49,7 @@ def GetLocation(move_type, env, current_frame):
             ymax = 767
             ymin = 767 - 60
 
-    diff = np.subtract(1*last_img, 1*current_img)
+    diff = np.subtract(last_img, current_img)
     diff [ymin:ymax, xmin:xmax] = 0
     
     #print(diff[767,1023])        
