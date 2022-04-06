@@ -11,4 +11,4 @@ To run the project:
  4. **Install** the required packages listed in *requirements.txt* by running: `pip install -r requirements.txt`
  5. **Install** the Duck Hunt package by running: `pip install file-name.whl`.
 > Note: I included all the .whl files in the repo. Use one for your system.
- 6. **Run** the *duck_hunt_main_mp.py*
+ 6. **Run** the *duck_hunt_main.py*
