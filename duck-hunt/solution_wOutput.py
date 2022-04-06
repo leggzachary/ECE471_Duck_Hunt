@@ -18,6 +18,7 @@ def GetLocation(move_type, env, current_frame):
     global crosshair_loc
     move_type = "absolute"
     
+    #print(current_frame.shape)
     # Convert the input image from 3-channel to grey
     img_grey = cv2.cvtColor(current_frame, cv2.COLOR_BGR2GRAY)
     #Transpose image
@@ -48,15 +49,21 @@ def GetLocation(move_type, env, current_frame):
         if ymax > 767:
             ymax = 767
             ymin = 767 - 60
-
+    
+    #last_img [ymin:ymax, xmin:xmax] = 255
+    
+    #diff = np.subtract(1.2*current_img, last_img)
     diff = np.subtract(1*last_img, 1*current_img)
     diff [ymin:ymax, xmin:xmax] = 0
     
-    #print(diff[767,1023])        
     
-    diff[diff<0] = 0   
+    #print(diff[767,1023])        
+    diff[diff<0] = 0
+    
     diff = diff.astype('uint8')
-
+    #cv2.imwrite("./diff.jpg", diff)
+    #cv2.imwrite("./curr.jpg", current_img.astype('uint8'))
+    #cv2.imwrite("./last.jpg", last_img.astype('uint8'))
     h = np.where(diff == np.amax(diff))
     coordinates = []
     if np.sum(last_img) != 0:
